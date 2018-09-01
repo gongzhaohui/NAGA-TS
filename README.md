@@ -1,5 +1,10 @@
 # NEGA-TS
  A Typescript application frame.
- #N
- --nest--server
- --
+ 
+ ##N  --nest    --server
+ 
+ ##A  --Angulat --client
+ 
+ ##G  --Graphql --API style
+ 
+ ##A  --Arangodb --database
