@@ -1,5 +1,5 @@
 # NAGA-TS
- A Typescript application frame.
+ A Typescript application framework.Forked from bojidaryovchev/nest-angular
  
  ##N  --nest    --server
  
