@@ -1,4 +1,4 @@
-# NEGA-TS
+# NAGA-TS
  A Typescript application frame.
  
  ##N  --nest    --server
