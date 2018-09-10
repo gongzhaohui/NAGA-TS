@@ -1,13 +1,34 @@
-# Ngnew
+# NAGA-TS
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+The client of this project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+The Server of this project was generated with [Nest CLI](https://github.com/nestjs/nest-cli) version 5.4.0.
+
+## Directory structure
+
+```
+Root
+├─dist
+│  ├─.bin
+│  ├─browser
+│  └─server
+├─e2e
+│  └─src
+└─src
+    ├─client
+    │  ├─app
+    │  └─assets
+    ├─server
+    └─shared
+        └─environments
+```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a angular dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
+`cd src\client`
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
