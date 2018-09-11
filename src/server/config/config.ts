@@ -2,7 +2,12 @@ import { extractKey } from '../utilities/keys';
 
 interface IEnvironmentConfig {
   rootPath: string;
-  db: string;
+  db: {
+    url: string;
+    databasename: string,
+    user: string;
+    password: string;
+  };
   httpPort: number;
   wsPort: number;
   jwtSecret: string;
@@ -23,28 +28,34 @@ const jwtSecret = extractKey(`${rootPath}/keys/jwt.private.key`);
 const Config: IConfig = {
   development: {
     rootPath,
-    db: 'mongodb://localhost:27017/store',
+    db: {
+      url: 'http://10.151.40.17:8529',
+      databasename: 'NLAA',
+      user: 'root',
+      password: 'fj00admin',
+    },
     httpPort: 3000,
     wsPort: 3001,
     jwtSecret: 'fj00admin',
     domain: 'localhost',
     httpProtocol: 'http',
-    wsProtocol: 'ws'
+    wsProtocol: 'ws',
   },
   production: {
     rootPath,
-    db: process.env.MONGODB_CONNECTION,
+    db: {
+      url: process.env.DB_URL,
+      databasename: 'NLAA',
+      user: 'root',
+      password: 'fj00admin',
+    },
     httpPort: +process.env.HTTP_SERVER_PORT,
     wsPort: +process.env.WS_PORT,
     jwtSecret: process.env.JWT_SECRET || 'fj00admin',
     domain: process.env.DOMAIN,
     httpProtocol: process.env.HTTP_PROTOCOL,
-    wsProtocol: process.env.WS_PROTOCOL
-  }
+    wsProtocol: process.env.WS_PROTOCOL,
+  },
 };
 
-export {
-  IEnvironmentConfig,
-  IConfig,
-  Config
-};
+export { IEnvironmentConfig, IConfig, Config };

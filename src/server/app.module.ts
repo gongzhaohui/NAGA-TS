@@ -17,7 +17,7 @@ import { GraphQLModule } from '@nestjs/graphql';
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
     }),
-    AngularUniversalModule.forRoot()
+    // AngularUniversalModule.forRoot()
   ],
   controllers: []
 })

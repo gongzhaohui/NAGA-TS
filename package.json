@@ -48,6 +48,7 @@
         "@nguniversal/express-engine": "^6.1.0",
         "@nguniversal/module-map-ngfactory-loader": "^6.1.0",
         "apollo-server-express": "^2.0.6",
+        "arangojs": "^6.6.0",
         "cookie-parser": "^1.4.3",
         "core-js": "^2.5.4",
         "graphql": "^14.0.2",
