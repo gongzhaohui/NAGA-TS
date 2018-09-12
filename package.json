@@ -46,11 +46,13 @@
         "@nguniversal/express-engine": "^6.1.0",
         "@nguniversal/module-map-ngfactory-loader": "^6.1.0",
         "apollo-server-express": "^2.0.6",
+        "arangojs": "^6.6.0",
         "core-js": "^2.5.4",
         "graphql": "^14.0.2",
         "graphql-tools": "^3.1.1",
         "reflect-metadata": "^0.1.12",
         "rxjs": "^6.2.2",
+        "rxjs-compat": "^6.3.2",
         "zone.js": "~0.8.26"
     },
     "devDependencies": {
