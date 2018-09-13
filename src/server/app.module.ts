@@ -2,21 +2,21 @@
 import { Module } from '@nestjs/common';
 
 // modules
-import { AuthModule } from './modules/auth/auth.module';
+// import { AuthModule } from './modules/auth/auth.module';
 import { DatabaseModule } from './modules/database/database.module';
 import { UserModule } from './modules/user/user.module';
-import { AngularUniversalModule } from './modules/angular-universal/angular-universal.module';
-import { GraphQLModule } from '@nestjs/graphql';
+// import { AngularUniversalModule } from './modules/angular-universal/angular-universal.module';
+// import { GraphqlModule } from './modules/graphql/graphql.module';
 
 @Module({
   imports: [
     DatabaseModule,
-    AuthModule,
+    // AuthModule,
     UserModule,
-    GraphQLModule.forRoot({
-      typePaths: ['./**/*.graphql'],
-      installSubscriptionHandlers: true,
-    }),
+    // GraphQLModule.forRoot({
+    //   typePaths: ['./**/*.graphql'],
+    //   installSubscriptionHandlers: true,
+    // }),
     // AngularUniversalModule.forRoot()
   ],
   controllers: []
