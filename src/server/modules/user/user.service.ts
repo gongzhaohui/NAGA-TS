@@ -1,23 +1,31 @@
 import {Inject, Injectable} from '@nestjs/common';
 // import {DatabaseModule} from '../database/database.module';
-import {DocumentCollection} from 'arangojs';
+import {Database, DocumentCollection} from 'arangojs';
 
-import {USER_MODEL_TOKEN} from '../../server.constants';
+import {USER_MODEL_TOKEN, DB_CONNECTION_TOKEN} from '../../server.constants';
 
 import {IUser} from './interfaces/user.interface';
 
 @Injectable()
 export class UserService {
-  constructor(@Inject(USER_MODEL_TOKEN) private readonly userCollection:
-                  DocumentCollection) {}
-  async getUsers(): Promise<any> {
-    return await this.userCollection.all();
+  constructor(@Inject(DB_CONNECTION_TOKEN) private readonly db: Database){}
+
+  private readonly varCollection: DocumentCollection = this.db.collection('users');
+
+  async getAll(): Promise<any> {
+    return await this.varCollection.all();
   }
   async getByKey(_key: string): Promise<any> {
-    return await this.userCollection.firstExample({_key});
+    return await this.varCollection.firstExample({_key});
   }
-  async getUser(bindVals: any): Promise<any> {
-    return await this.userCollection.firstExample(bindVals);
+  async getOne(bindVars: any): Promise<any> {
+    return await this.varCollection.firstExample(bindVars);
   }
-  async updateUser(_key: string): Promise<any> {}
+  async updateBykey(_key: string, body: any): Promise<any> {return await this.varCollection.update(_key, body, {returnNew: true}); }
+  async insertOne(body: any): Promise<any> { return await this.varCollection.save(body); }
+  // async insertList(list: any[]): Promise<any[]> { }
+  async deleteOne(_key: string): Promise<any> { return await this.varCollection.removeByKeys([_key], {}); }
+  async deleteByKeys(_keys: string[]): Promise<any> {
+    return await this.varCollection.removeByKeys([..._keys], {});
+  }
 }

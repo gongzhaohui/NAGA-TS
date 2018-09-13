@@ -1,5 +1,4 @@
 {
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
@@ -11,11 +10,11 @@
     "experimentalDecorators": true,
     "target": "es6",
     "sourceMap": true,
-    "outDir": "./dist/server",
-    "baseUrl": "./src/server"
+    "outDir": "../../dist/server",
+    "baseUrl": "./"
   },
   "include": [
-    "src/**/*"
+    "./**/*"
   ],
   "exclude": [
     "node_modules",
