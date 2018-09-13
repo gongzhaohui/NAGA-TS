@@ -1,5 +1,4 @@
 type Query {
-<<<<<<< HEAD
   getUsers: [User]
   user(_key: String!): User
 }
@@ -20,25 +19,4 @@ type User {
   gender:String
   email:String
   role:String[]
-=======
-  getCats: [Cat]
-  cat(id: ID!): Cat
-}
-
-type Mutation {
-  createCat(name: String): Cat
-}
-
-type Subscription {
-  catCreated: Cat
-}
-
-type user {
-  _key: String
-  name: String
-  birthed: String
-  gender:String
-  email:String
-  title:String
->>>>>>> original
 }

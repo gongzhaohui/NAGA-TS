@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// import './polyfills';
-=======
 import './polyfills';
->>>>>>> original
 
 import { enableProdMode } from '@angular/core';
 import { NestFactory } from '@nestjs/core';
@@ -22,16 +18,12 @@ async function bootstrap() {
 
   require('./config/index')(SERVER_CONFIG, express);
 
-<<<<<<< HEAD
   const app = await NestFactory.create(
     ApplicationModule,
     express,
      {
     logger: true,
   });
-=======
-  const app = await NestFactory.create(ApplicationModule, express);
->>>>>>> original
 
   app.enableCors();
 

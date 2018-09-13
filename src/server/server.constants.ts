@@ -7,12 +7,6 @@ export const SERVER_CONFIG: IEnvironmentConfig = Config[env];
 export const DB_CONNECTION_TOKEN: string = 'DbConnectionToken';
 export const SERVER_CONFIG_TOKEN: string = 'ServerConfigToken';
 export const USER_MODEL_TOKEN: string = 'UserModelToken';
-<<<<<<< HEAD
-export const FACEBOOK_CONFIG_TOKEN: string = 'FacebookConfigToken';
-export const TWITTER_CONFIG_TOKEN: string = 'TwitterConfigToken';
-export const GOOGLE_CONFIG_TOKEN: string = 'GoogleConfigToken';
-=======
->>>>>>> original
 
 export const MESSAGES = {
   UNAUTHORIZED_EMAIL_IN_USE: 'The email already exists',
