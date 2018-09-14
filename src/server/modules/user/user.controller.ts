@@ -6,9 +6,15 @@ import {UserService} from './user.service';
 export class UserController {
   constructor(
     private readonly userService: UserService
-  ) {}
+  ) { }
   @Get()
-  async getAll(): Promise<any>{
+  async getAll(): Promise<any> {
+    // console.log('bindVars' + JSON.stringify({ _key: id }));
     return await this.userService.getAll();
+  }
+  @Get(':id')
+  async getOne(@Param('id') id: string): Promise<any> {
+    // console.log('bindVars' + JSON.stringify({ _key: id }));
+    return await this.userService.getByKey(id );
   }
 }

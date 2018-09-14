@@ -1,2 +1,7 @@
 {
+  "editor.tabSize": 2,
+  "typescript.preferences.quoteStyle": "auto",
+  "typescript.referencesCodeLens.enabled": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis": true,
+  "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true
 }

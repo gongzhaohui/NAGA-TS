@@ -8,7 +8,7 @@ import { IUser } from './interfaces/user.interface';
 const pubSub = new PubSub();
 
 @Resolver('user')
-export class UsersResolvers {
+export class UserResolvers {
   constructor(private readonly userService: UserService) {}
 
   @Query()
@@ -18,16 +18,14 @@ export class UsersResolvers {
   }
 
   @Query('user')
-  async findOneById(
-    @Args('_key', ParseIntPipe)
-    id: number,
-  ): Promise<IUser> {
+  async findOneById(@Args('_key') _key: string): Promise<any> {
+    // console.log('userkey:' + _key);
     return await this.userService.getByKey(_key);
   }
 
   @Mutation('createUser')
-  async create(@Args() args: User): Promise<User> {
-    const createdUser = await this.usersService.create(args);
+  async create(@Args() args: any): Promise<any> {
+    const createdUser = await this.userService.insertOne(args);
     pubSub.publish('userCreated', { userCreated: createdUser });
     return createdUser;
   }
