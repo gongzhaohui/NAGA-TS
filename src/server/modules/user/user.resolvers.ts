@@ -14,7 +14,7 @@ export class UsersResolvers {
   @Query()
   @UseGuards(CtxGuard)
   async getUsers() {
-    return await this.userService.findAll();
+    return await this.userService.getAll();
   }
 
   @Query('user')
@@ -22,7 +22,7 @@ export class UsersResolvers {
     @Args('_key', ParseIntPipe)
     id: number,
   ): Promise<IUser> {
-    return await this.userService.getUserByKey(_key);
+    return await this.userService.getByKey(_key);
   }
 
   @Mutation('createUser')
