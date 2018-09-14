@@ -2,15 +2,15 @@
 
 ## 项目名的含义
 
-* [*N*est](https://github.com/nestjs/nest)
-* [*A*ngular](https://github.com/angular/angular)
-* [*G*raphql](https://github.com/nestjs/graphql)
-* [*A*rangodb](https://github.com/arangodb/arangodb)
-* [*T*ype*S*cript](https://github.com/Microsoft/TypeScript)
+- [*N*est](https://github.com/nestjs/nest)
+- [*A*ngular](https://github.com/angular/angular)
+- [*G*raphql](https://github.com/nestjs/graphql)
+- [*A*rangodb](https://github.com/arangodb/arangodb)
+- [*T*ype*S*cript](https://github.com/Microsoft/TypeScript)
 
 ## 选择的理由
 
-0. 迷恋Javascript。愿意相信Javascript可以统一前后端和数据库。
+0. 迷恋 Javascript。愿意相信 Javascript 可以统一前后端和数据库。
 
 1. 服务器端选择node。但是N不是Node的N，是Nest的N。Nest是一个架构类似Angular的node框架。作者原话[heavily inspired by Angular](https://github.com/nestjs/nest#description)。**Typescript**。
 2. 客户端框架选择Angular。**Typescript**。考察了react和vue。react、graphql、relay本是同根生，react的component-render+jsx模式也很迷人，但relay与graphql的__generated__+createFragmentContainer结合方式却让人不敢恭维。vue，国人创建的人气框架，非常想认真的学习一下。但最终还是选择了Angular。喜欢它的结构性。很多人说Angular学习曲线陡，可能是指理解它的底层会很难。使用电脑的时候一定要弄懂底层API再用，使用Excel时一定要搞懂cell的数据结构和底层实现，可能没几个人能用得上电脑了，也没几个人会用Excel了。
@@ -43,9 +43,12 @@ Root
 
 Run `ng serve` for a angular dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+Run `npm start` for a node dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+
 ## Code scaffolding
 
 `cd src\client`
+
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build

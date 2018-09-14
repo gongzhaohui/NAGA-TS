@@ -8,7 +8,7 @@ export class UserController {
     private readonly userService: UserService
   ) {}
   @Get()
-  async findAll(): Promise<any>{
-    return await this.userService.getUsers();
+  async getAll(): Promise<any>{
+    return await this.userService.getAll();
   }
 }

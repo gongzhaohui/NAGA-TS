@@ -13,7 +13,10 @@ import { UserModule } from './modules/user/user.module';
     DatabaseModule,
     // AuthModule,
     UserModule,
-    // GraphqlModule,
+    // GraphQLModule.forRoot({
+    //   typePaths: ['./**/*.graphql'],
+    //   installSubscriptionHandlers: true,
+    // }),
     // AngularUniversalModule.forRoot()
   ],
   controllers: []
