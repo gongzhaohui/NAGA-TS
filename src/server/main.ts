@@ -17,13 +17,14 @@ async function bootstrap() {
   }
 
   require('./config/index')(SERVER_CONFIG, express);
-
+  // console.log('config:' + JSON.stringify(SERVER_CONFIG));
   const app = await NestFactory.create(
     ApplicationModule,
     express,
-     {
-    logger: true,
-  });
+    //  {
+    // logger: true,
+    // }
+  );
 
   app.enableCors();
 
