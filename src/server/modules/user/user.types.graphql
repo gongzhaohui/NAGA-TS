@@ -4,7 +4,9 @@ type Query {
 }
 
 type Mutation {
-  createUser(_key: String, name: String, birthed: String,title:String, gender:String, email:String, roles:String): User
+  createUser(body: User): User
+  logIn(name: String!, password: String!): User
+  register(body: User): User
 }
 
 type Subscription {
@@ -15,8 +17,10 @@ type User {
   _key: String
   name: String
   birthed: String
-  title:String
-  gender:String
-  email:String
-  roles:String
+  title: String
+  gender: String
+  email: String
+  roles: String
+  salt: string
+  hashedPassword: string
 }
