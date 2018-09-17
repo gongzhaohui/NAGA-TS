@@ -1,5 +1,14 @@
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Subscription, Context, Info, Root } from '@nestjs/graphql';
+import {
+  Args,
+  Mutation,
+  Query,
+  Resolver,
+  Subscription,
+  Context,
+  Info,
+  Root,
+} from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { CtxGuard } from '../../guards/ctx.guard';
 import { UserService } from './user.service';
@@ -15,15 +24,21 @@ export class UserResolvers {
   @Query()
   @UseGuards(CtxGuard)
   async getUsers(
-      @Root() root: any, @Args() args: any, @Context() ctx: any,
-      @Info() info: any) {
+    @Root() root: any,
+    @Args() args: any,
+    @Context() ctx: any,
+    @Info() info: any,
+  ) {
     return await this.userService.getAll({});
   }
 
   @Query('user')
   async getByKey(
-      @Root() root: any, @Args() args: any, @Context() ctx: any,
-      @Info() info: any): Promise<any> {
+    @Root() root: any,
+    @Args() args: any,
+    @Context() ctx: any,
+    @Info() info: any,
+  ): Promise<any> {
     // console.log('userkey:' + _key);
     const _key = args('_key');
     return await this.userService.getByKey(_key);
@@ -31,21 +46,29 @@ export class UserResolvers {
 
   @Mutation('createUser')
   async create(
-      @Root() root: any, @Args() args: any, @Context() ctx: any,
-      @Info() info: any): Promise<any> {
-    const createdUser = await this.userService.insertOne(args);
+    @Root() root: any,
+    @Args() args: any,
+    @Context() ctx: any,
+    @Info() info: any,
+  ): Promise<any> {
+    const createdUser = await this.userService.insertOne(args.body);
     pubSub.publish('userCreated', { userCreated: createdUser });
     return createdUser;
   }
   @Mutation('signin')
-  async signin(@Root() root: any, @Args() args: any, @Context() ctx: any,
-               @Info() info: any) {
-
-  }
+  async signin(
+    @Root() root: any,
+    @Args() args: any,
+    @Context() ctx: any,
+    @Info() info: any,
+  ) {}
   @Mutation('signup')
-  async signup(@Root() root: any, @Args() args: any, @Context() ctx: any,
-               @Info() info: any) {
-  }
+  async signup(
+    @Root() root: any,
+    @Args() args: any,
+    @Context() ctx: any,
+    @Info() info: any,
+  ) {}
   @Subscription('userCreated')
   userCreated() {
     return {

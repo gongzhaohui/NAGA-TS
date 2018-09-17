@@ -60,6 +60,8 @@
         "helmet": "^3.13.0",
         "joi": "^13.6.0",
         "lodash": "^4.17.11",
+        "passport-jwt": "^4.0.0",
+        "passport-local": "^1.0.0",
         "reflect-metadata": "^0.1.12",
         "rxjs": "^6.2.2",
         "rxjs-compat": "^6.3.2",
