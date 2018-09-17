@@ -11,7 +11,7 @@ export class UserController {
     // console.log('bindVars' + JSON.stringify(bindVars) + ';' + !bindVars);
     let rst: any;
     if (_.isEmpty(bindVars)) {
-      rst = await this.userService.getAll();
+      rst = await this.userService.getAll({});
     } else {
       rst = await this.userService.getByBindVars(bindVars);
     }

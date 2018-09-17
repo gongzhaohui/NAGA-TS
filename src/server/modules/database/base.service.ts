@@ -1,4 +1,6 @@
-abstract class BaseService {
+import { Injectable } from '@nestjs/common';
+@Injectable()
+export abstract class BaseService {
   abstract collection: any;
 
   async getAll(opts: any): Promise<any[]> {

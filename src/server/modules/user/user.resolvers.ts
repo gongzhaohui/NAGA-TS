@@ -1,9 +1,10 @@
 import { ParseIntPipe, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Subscription, Context, Info, Root } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { CtxGuard } from '../../guards/ctx.guard';
 import { UserService } from './user.service';
 import { IUser } from './interfaces/user.interface';
+import { root } from 'rxjs/internal/util/root';
 
 const pubSub = new PubSub();
 
@@ -13,23 +14,38 @@ export class UserResolvers {
 
   @Query()
   @UseGuards(CtxGuard)
-  async getUsers() {
-    return await this.userService.getAll();
+  async getUsers(
+      @Root() root: any, @Args() args: any, @Context() ctx: any,
+      @Info() info: any) {
+    return await this.userService.getAll({});
   }
 
   @Query('user')
-  async findOneById(@Args('_key') _key: string): Promise<any> {
+  async getByKey(
+      @Root() root: any, @Args() args: any, @Context() ctx: any,
+      @Info() info: any): Promise<any> {
     // console.log('userkey:' + _key);
+    const _key = args('_key');
     return await this.userService.getByKey(_key);
   }
 
   @Mutation('createUser')
-  async create(@Args() args: any): Promise<any> {
+  async create(
+      @Root() root: any, @Args() args: any, @Context() ctx: any,
+      @Info() info: any): Promise<any> {
     const createdUser = await this.userService.insertOne(args);
     pubSub.publish('userCreated', { userCreated: createdUser });
     return createdUser;
   }
+  @Mutation('signin')
+  async signin(@Root() root: any, @Args() args: any, @Context() ctx: any,
+               @Info() info: any) {
 
+  }
+  @Mutation('signup')
+  async signup(@Root() root: any, @Args() args: any, @Context() ctx: any,
+               @Info() info: any) {
+  }
   @Subscription('userCreated')
   userCreated() {
     return {

@@ -5,8 +5,8 @@ type Query {
 
 type Mutation {
   createUser(body: User): User
-  logIn(name: String!, password: String!): User
-  register(body: User): User
+  signin(name: String!, password: String!): Token
+  signup(body: User): Token
 }
 
 type Subscription {
@@ -20,7 +20,10 @@ type User {
   title: String
   gender: String
   email: String
-  roles: String
-  salt: string
-  hashedPassword: string
+  roles: [String]
+  salt: String
+  hashedPassword: String
+}
+type Token{
+  token:String
 }
