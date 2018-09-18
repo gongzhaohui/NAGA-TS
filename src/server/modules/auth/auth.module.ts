@@ -18,14 +18,13 @@ import { UserModule } from '../user/user.module';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { bodyValidatorMiddleware } from './middlewares/body-validator.middleware';
+import { AuthResolvers} from './auth.resolvers';
 
 @Module({
   imports: [UserModule],
   providers: [
     // ...authProviders,
-    AuthService,
-    LocalStrategy,
-    JwtStrategy,
+    AuthService, AuthResolvers, LocalStrategy, JwtStrategy,
     // FacebookStrategy,
     // TwitterStrategy,
     // GoogleStrategy

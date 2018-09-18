@@ -10,6 +10,7 @@ import {
 } from '../../../utilities/encryption';
 import { MESSAGES, USER_MODEL_TOKEN } from '../../../server.constants';
 import { UserService } from '../../user/user.service';
+import { async } from 'rxjs/internal/scheduler/async';
 @Injectable()
 export class LocalStrategy {
   constructor(private readonly userService: UserService) {
@@ -25,18 +26,15 @@ export class LocalStrategy {
           passwordField: 'password',
         },
         async (
+          req: Express.Request,
           _key: string,
           password: string,
-          email: string,
-          gender: string,
-          title: string,
-          birthed: string,
           done: Function,
         ) => {
           try {
-            if (await this.userService.getByKey(_key)) {
+            if (await this.userService.getByKey(user._key)) {
               return done(
-                new UnauthorizedException(MESSAGES.UNAUTHORIZED_EMAIL_IN_USE),
+                new UnauthorizedException(MESSAGES.UNAUTHORIZED_USER_IN_USE),
                 false,
               );
             }
@@ -77,7 +75,7 @@ export class LocalStrategy {
 
             if (!user) {
               return done(
-                new UnauthorizedException(MESSAGES.UNAUTHORIZED_INVALID_EMAIL),
+                new UnauthorizedException(MESSAGES.UNAUTHORIZED_INVALID_USER),
                 false,
               );
             }

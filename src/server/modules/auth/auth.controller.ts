@@ -12,13 +12,13 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('signup')
-  async requestJsonWebTokenAfterLocalSignUp(@Req() req: Request): Promise<IToken> {
-    return await this.authService.createToken(req.user);
+  async requestJsonWebTokenAfterLocalSignUp(@Req() req: Request): Promise<any> {
+    return await this.authService.signup(req.user);
   }
 
   @Post('signin')
-  async requestJsonWebTokenAfterLocalSignIn(@Req() req: Request): Promise<IToken> {
-    return await this.authService.createToken(req.user);
+  async requestJsonWebTokenAfterLocalSignIn(@Req() req: Request): Promise<any> {
+    return await this.authService.signin({ _key: req.user._key , password: req.user.password});
   }
 
   @Get('authorized')

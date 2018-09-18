@@ -4,9 +4,9 @@ type Query {
 }
 
 type Mutation {
-  createUser(body: TypeInput): User
-  signin(name: String!, password: String!): Token
-  signup(body: TypeInput): Token
+  createUser(body: UserInput): User
+  signin(name: String!, password: String!): AuthPayload
+  signup(body: UserInput): AuthPayload
 }
 
 type Subscription {
@@ -24,10 +24,8 @@ type User {
   salt: String
   hashedPassword: String
 }
-type Token {
-  token: String
-}
-input TypeInput {
+
+input UserInput {
   _key: String
   name: String
   birthed: String
@@ -35,4 +33,9 @@ input TypeInput {
   gender: String
   email: String
   roles: String
+  password:String
+}
+type AuthPayload {
+  token: String
+  user: User
 }
