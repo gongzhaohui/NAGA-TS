@@ -11,6 +11,7 @@ import { UserResolvers } from './user.resolvers';
   imports: [DatabaseModule],
   controllers: [UserController],
   providers: [UserService, UserResolvers],
-  exports: [],
+  exports: [UserService],
 })
-export class UserModule {}
+export class UserModule {
+}

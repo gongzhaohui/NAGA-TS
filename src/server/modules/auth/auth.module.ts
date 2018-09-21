@@ -1,50 +1,24 @@
-import {
-  Module,
-  NestModule,
-  MiddlewareConsumer,
-  RequestMethod,
-} from '@nestjs/common';
-import { authenticate } from 'passport';
-
-// Strategies
-import { LocalStrategy } from './passport/local.strategy';
-import { JwtStrategy } from './passport/jwt.strategy';
-// import { FacebookStrategy } from './passport/facebook.strategy';
-// import { TwitterStrategy } from './passport/twitter.strategy';
-// import { GoogleStrategy } from './passport/google-plus.strategy';
-
-import { UserModule } from '../user/user.module';
-// import { authProviders } from './auth.providers';
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
+import { JwtStrategy } from './passport/jwt.strategy';
+import { UserModule } from '../user/user.module';
+import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
-import { bodyValidatorMiddleware } from './middlewares/body-validator.middleware';
-import { AuthResolvers} from './auth.resolvers';
-
+import { SERVER_CONFIG } from '../../server.constants';
 @Module({
-  imports: [UserModule],
-  providers: [
-    // ...authProviders,
-    AuthService, AuthResolvers, LocalStrategy, JwtStrategy,
-    // FacebookStrategy,
-    // TwitterStrategy,
-    // GoogleStrategy
+  imports: [
+    PassportModule.register({defaultStrategy: 'jwt'}),
+    JwtModule.register({
+      secretOrPrivateKey: SERVER_CONFIG.jwtSecret,
+      signOptions: {
+        expiresIn: 3600,
+      },
+    }),
+    UserModule,
   ],
-  controllers: [AuthController]
+  providers: [AuthService, JwtStrategy],
+  controllers: [AuthController],
 })
-export class AuthModule implements NestModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(
-        bodyValidatorMiddleware,
-        authenticate('signup', { session: false })
-      )
-      .forRoutes('api/auth/signup');
-
-    consumer
-      .apply(
-        bodyValidatorMiddleware,
-        authenticate('signin', { session: false })
-      )
-      .forRoutes('api/auth/signin');
-  }
+export class AuthModule {
 }

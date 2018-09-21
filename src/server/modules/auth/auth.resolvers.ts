@@ -27,7 +27,7 @@ export class AuthResolvers {
     // 1
     const body = args.body;
        // 3
-    return await this.authService.signup(body);
+    return await this.authService.signUp(body);
   }
   @Mutation('signin')
   async login(
@@ -36,6 +36,6 @@ export class AuthResolvers {
     @Context() ctx: any,
     @Info() info: any,
   ) {
-    return await this.authService.signin(args);
+    return await this.authService.signIn(args);
   }
 }

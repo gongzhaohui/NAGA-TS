@@ -1,5 +1,5 @@
 // nest
-import { Module } from '@nestjs/common';
+import { Module, Request } from '@nestjs/common';
 
 // modules
 import { AuthModule } from './modules/auth/auth.module';
@@ -10,15 +10,14 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
-    DatabaseModule,
-    AuthModule,
-    UserModule,
-    GraphQLModule.forRoot({
+    DatabaseModule, AuthModule, UserModule, GraphQLModule.forRoot({
       typePaths: ['./**/*.graphql'],
       installSubscriptionHandlers: true,
+      // context: ({ req}) => ({req}),
     }),
     // AngularUniversalModule.forRoot()
   ],
-  controllers: []
+controllers: [],
 })
-export class ApplicationModule {}
+export class ApplicationModule {
+}

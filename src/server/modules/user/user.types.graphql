@@ -20,7 +20,7 @@ type User {
   title: String
   gender: String
   email: String
-  roles: String
+  roles: [String]
   salt: String
   hashedPassword: String
 }

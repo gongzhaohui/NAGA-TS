@@ -36,7 +36,7 @@ const Config: IConfig = {
     },
     httpPort: 3000,
     wsPort: 3001,
-    jwtSecret,
+    jwtSecret: 'fj00admin',
     domain: 'localhost',
     httpProtocol: 'http',
     wsProtocol: 'ws',
