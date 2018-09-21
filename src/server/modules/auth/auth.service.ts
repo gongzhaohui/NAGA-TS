@@ -16,12 +16,12 @@ export class AuthService {
     // instead, return a token once you verify user credentials
     // const user: IJwtPayload = jwtPayload;
     if (!this.validateUser(user._key)) {
-      return ;
+      throw new UnauthorizedException();
     }
     const jwtPayload: IJwtPayload = {
       sub: user._key,
       roles: user.roles,
-       };
+    };
     return this.jwtService.sign(jwtPayload);
   }
 
