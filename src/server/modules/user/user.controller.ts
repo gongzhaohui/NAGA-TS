@@ -1,16 +1,17 @@
 import {Body, Controller, Get, Param, Post, Query, UseGuards} from '@nestjs/common';
 import {AuthGuard} from '@nestjs/passport';
 import * as _ from 'lodash';
-
+import {ApiBearerAuth } from '@nestjs/swagger';
 // import {AuthService} from '../auth/auth.service';
 import {UserService} from './user.service';
 
 // import { object } from 'joi';
 
-@Controller('api/users')
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
   @Get()
+  @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   async getAllOrByBindVars(@Query() bindVars: object): Promise<any> {
     // console.log('bindVars' + JSON.stringify(bindVars) + ';' + !bindVars);

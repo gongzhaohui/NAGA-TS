@@ -3,6 +3,7 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { IJwtPayload } from './interfaces/jwt-payload.interface';
 import { IUser } from '../user/interfaces/user.interface';
+import { LoginUserDto } from '../user/dto/login.user.dto';
 
 @Injectable()
 export class AuthService {
@@ -11,15 +12,17 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signIn(user: IUser): Promise<string> {
+  async signIn(loginUser: LoginUserDto): Promise<string> {
     // In the real-world app you shouldn't expose this method publicly
     // instead, return a token once you verify user credentials
     // const user: IJwtPayload = jwtPayload;
-    if (!this.validateUser(user._key)) {
+    const user: IUser = await this.validateUser(loginUser);
+    if (!user) {
       throw new UnauthorizedException();
     }
     const jwtPayload: IJwtPayload = {
       sub: user._key,
+      password: '',
       roles: user.roles,
     };
     return this.jwtService.sign(jwtPayload);
@@ -32,7 +35,8 @@ export class AuthService {
     const payload = await this.usersService.insertOne(user);
     return this.signIn(payload);
   }
-  async validateUser(userKey: string): Promise<any> {
+  async validateUser(loginUser: LoginUserDto): Promise<IUser> {
+    const userKey = loginUser._key;
     return await this.usersService.getByKey(userKey);
   }
 }

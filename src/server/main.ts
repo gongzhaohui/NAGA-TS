@@ -1,11 +1,12 @@
 import './polyfills';
 
-import { enableProdMode } from '@angular/core';
-import { NestFactory } from '@nestjs/core';
+import {enableProdMode} from '@angular/core';
+import {NestFactory} from '@nestjs/core';
+import {DocumentBuilder, SwaggerModule} from '@nestjs/swagger';
 import * as e from 'express';
-
-import { ApplicationModule } from './app.module';
-import { SERVER_CONFIG } from './server.constants';
+import {ApplicationModule} from './app.module';
+import {RolesGuard} from './guards/roles.guard';
+import {SERVER_CONFIG} from './server.constants';
 
 declare const module: any;
 
@@ -27,7 +28,16 @@ async function bootstrap() {
   );
 
   app.enableCors();
-
+  app.useGlobalGuards(new RolesGuard());
+  const options = new DocumentBuilder()
+                      .setTitle('NAGA-TS Api')
+                      .setDescription('The NAGA-TS API description')
+                      .setVersion('0.1')
+                      .addTag('NAGA')
+                      .addBearerAuth('authorization', 'header')
+                      .build();
+  const document = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup('api', app, document);
   await app.listen(SERVER_CONFIG.httpPort);
 
   if (module.hot) {
