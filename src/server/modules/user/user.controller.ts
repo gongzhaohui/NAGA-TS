@@ -4,6 +4,8 @@ import * as _ from 'lodash';
 import {ApiBearerAuth } from '@nestjs/swagger';
 // import {AuthService} from '../auth/auth.service';
 import {UserService} from './user.service';
+import { IUser } from './interfaces/user.interface';
+import {CreateUserDto } from './dto/create.user.dto';
 
 // import { object } from 'joi';
 
@@ -29,5 +31,9 @@ export class UserController {
     // console.log('bindVars' + JSON.stringify({ _key: id }));
     // return await this.userService.getOne({ gender: id });
     return await this.userService.getByKey(id);
+  }
+  @Post()
+  async addOne(@Body() theOne: CreateUserDto) {
+    return await this.userService.insertOne(theOne);
   }
 }

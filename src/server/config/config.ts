@@ -29,8 +29,8 @@ const Config: IConfig = {
   development: {
     rootPath,
     db: {
-      url: 'http://10.151.40.17:8529',
-      dbname: 'NLAA',
+      url: 'http://localhost:8529',
+      dbname: 'NAGA',
       username: 'gong',
       password: 'fj00admin',
     },

@@ -25,8 +25,8 @@ export class JwtStrategy extends PassportStrategy
       password: payload.password,
       roles: payload.roles,
     };
-    console.log('payload:' + payload.sub);
-    console.log('logininfo:' + JSON.stringify(longinUser));
+    // console.log('payload:' + payload.sub);
+    // console.log('logininfo:' + JSON.stringify(longinUser));
     const user: IUser = await this.authService.validateUser(longinUser);
 
     if (!user) {

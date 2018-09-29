@@ -27,6 +27,9 @@ export class AuthService {
     };
     return this.jwtService.sign(jwtPayload);
   }
+  async createToken(jwtPayload: IJwtPayload) {
+    return this.jwtService.sign(jwtPayload);
+  }
 
   async findUser(_key: string) {
     return await this.usersService.getByKey(_key);
