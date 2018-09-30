@@ -5,9 +5,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Reflector } from '@nestjs/core';
-
+import { GqlExecutionContext } from '@nestjs/graphql';
 @Injectable()
-export class RolesGuard extends AuthGuard('jwt') {
+export class GQLRolesGuard extends AuthGuard('jwt') {
   // constructor(private readonly reflector: Reflector = new Reflector()) {
   //   super();
   // }
@@ -31,5 +31,9 @@ export class RolesGuard extends AuthGuard('jwt') {
       return isValidUser && user && user.roles && hasRole();
     }
     return true;
+  }
+  getRequest(context: ExecutionContext) {
+    const ctx = GqlExecutionContext.create(context);
+    return ctx.getContext().req;
   }
 }

@@ -30,7 +30,7 @@ async function bootstrap() {
 
   app.enableCors();
   // app.useGlobalGuards(new (AuthGuard('jwt'))());
-  // app.useGlobalGuards(new RolesGuard());
+  app.useGlobalGuards(new RolesGuard());
   const options = new DocumentBuilder()
     .setTitle('NAGA-TS Api')
     .setDescription('The NAGA-TS API description')

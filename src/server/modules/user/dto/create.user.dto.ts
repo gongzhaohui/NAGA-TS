@@ -4,8 +4,7 @@ export class CreateUserDto {
   _key: string;
   @ApiModelProperty() roles: string[];
   @ApiModelProperty() email: string;
-  @ApiModelProperty() salt: string;
-  @ApiModelProperty() hashedPassword: string;
+  @ApiModelProperty() password: string;
   @ApiModelProperty() name: String;
   @ApiModelProperty() birthed: String;
   @ApiModelProperty() title: String;

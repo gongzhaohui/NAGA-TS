@@ -1,9 +1,10 @@
 import { JwtService } from '@nestjs/jwt';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, NotAcceptableException} from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { IJwtPayload } from './interfaces/jwt-payload.interface';
 import { IUser } from '../user/interfaces/user.interface';
 import { LoginUserDto } from '../user/dto/login.user.dto';
+import { CreateUserDto } from '../user/dto/create.user.dto';
 
 @Injectable()
 export class AuthService {
@@ -22,21 +23,22 @@ export class AuthService {
     }
     const jwtPayload: IJwtPayload = {
       sub: user._key,
-      password: '',
       roles: user.roles,
     };
-    return this.jwtService.sign(jwtPayload);
+    return this.createToken(jwtPayload);
   }
   async createToken(jwtPayload: IJwtPayload) {
     return this.jwtService.sign(jwtPayload);
   }
 
-  async findUser(_key: string) {
-    return await this.usersService.getByKey(_key);
-  }
-  async signUp(user: IUser): Promise<string> {
-    const payload = await this.usersService.insertOne(user);
-    return this.signIn(payload);
+  async signUp(user: CreateUserDto): Promise<string> {
+    try {
+      const createdUser: IUser = await this.usersService.insertOne(user);
+      const payload: IJwtPayload = { sub: user._key, roles: createdUser.roles};
+      return this.createToken(payload);
+    } catch {
+      throw new NotAcceptableException('Can`t create user.');
+    }
   }
   async validateUser(loginUser: LoginUserDto): Promise<IUser> {
     const userKey = loginUser._key;

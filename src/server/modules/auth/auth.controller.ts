@@ -26,8 +26,8 @@ export class AuthController {
   @Get('authorized')
   @ApiBearerAuth()
   @Roles('user')
-  @UseGuards(AuthGuard('jwt'), RolesGuard)
-  // @Roles('user')
+  // @UseGuards(AuthGuard('jwt'), RolesGuard)
+    @UseGuards(AuthGuard('jwt'))
   public async authorized() {
     console.log('Authorized route...');
   }
