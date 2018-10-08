@@ -17,8 +17,8 @@ export abstract class BaseService {
   async getByBindVars(bindVars: object): Promise<any> {
     return await this.collection.firstExample(bindVars);
   }
-  async updateBykey(_key: string, body: any, opts: any): Promise<any> {
-    return await this.collection.update(_key, body, opts);
+  async updateBykey(_key: string, body: any): Promise<any> {
+    return await this.collection.update(_key, body, { returnNew: true });
   }
   async insertOne(body: any): Promise<any> {
     return await this.collection.save(body, { returnNew: true });

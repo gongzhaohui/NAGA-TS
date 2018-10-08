@@ -22,8 +22,7 @@ export class JwtStrategy extends PassportStrategy
   public async validate(payload: IJwtPayload) {
     const longinUser: LoginUserDto = {
       _key: payload.sub,
-      password: payload.password,
-      roles: payload.roles,
+      password: ''
     };
     // console.log('payload:' + payload.sub);
     // console.log('logininfo:' + JSON.stringify(longinUser));

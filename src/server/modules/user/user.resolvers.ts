@@ -10,7 +10,7 @@ import {
   Root,
 } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { CtxGuard } from '../../guards/ctx.guard';
+import { GqlAuthGuard } from '../../guards/gql-auth.guard';
 import { UserService } from './user.service';
 import { IUser } from './interfaces/user.interface';
 import { root } from 'rxjs/internal/util/root';
@@ -22,7 +22,7 @@ export class UserResolvers {
   constructor(private readonly userService: UserService) {}
 
   @Query()
-  @UseGuards(CtxGuard)
+  @UseGuards(GqlAuthGuard)
   async getUsers(
     @Root() root: any,
     @Args() args: any,
