@@ -74,4 +74,7 @@ export class AuthService {
     };
     return this.createToken(jwtPayload);
   }
+  // todo cleanup session...
+  logOut(): void{
+  }
 }
