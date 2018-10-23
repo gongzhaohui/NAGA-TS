@@ -1,0 +1,22 @@
+{
+    "type": "mssql",
+    "host": "localhost",
+    "username": "gong",
+    "password": "G1971g",
+    "database": "tipMan",
+    "domain": "dfg",
+    "logging": false,
+    "entities": ["src/server/modules/**/**.entity{.ts,.js}"],
+    "synchronize": true,
+    "migrations": [
+        "src/migration/**/*.ts"
+    ],
+    "subscribers": [
+        "src/subscriber/**/*.ts"
+    ],
+    "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
+    }
+}

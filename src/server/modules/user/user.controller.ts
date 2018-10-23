@@ -6,6 +6,8 @@ import {ApiBearerAuth } from '@nestjs/swagger';
 import {UserService} from './user.service';
 import { IUser } from './interfaces/user.interface';
 import {CreateUserDto } from './dto/create.user.dto';
+import {DeepPartial} from 'typeorm';
+import {UserEntity} from './user.entity';
 
 // import { object } from 'joi';
 
@@ -19,9 +21,9 @@ export class UserController {
     // console.log('bindVars' + JSON.stringify(bindVars) + ';' + !bindVars);
     let rst: any;
     if (_.isEmpty(bindVars)) {
-      rst = await this.userService.getAll({});
+      rst = await this.userService.findAll();
     } else {
-      rst = await this.userService.getByBindVars(bindVars);
+      rst = await this.userService.findOne(bindVars);
     }
     return rst;
   }
@@ -30,10 +32,10 @@ export class UserController {
   async getByKey(@Param('id') id: string): Promise<any> {
     // console.log('bindVars' + JSON.stringify({ _key: id }));
     // return await this.userService.getOne({ gender: id });
-    return await this.userService.getByKey(id);
+    return await this.userService.findOneById(id);
   }
   @Post()
-  async addOne(@Body() theOne: CreateUserDto) {
-    return await this.userService.insertOne(theOne);
+  async addOne(@Body() theOne: DeepPartial<UserEntity>) {
+    return await this.userService.create(theOne);
   }
 }

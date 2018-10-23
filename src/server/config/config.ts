@@ -8,19 +8,31 @@ interface IEnvironmentConfig {
     username: string;
     password: string;
   };
+  mssql: {
+    server: string;
+    database: string;
+    user: string;
+    password: string;
+  };
   httpPort: number;
   wsPort: number;
   jwtSecret: string;
   domain: string;
   httpProtocol: string;
   wsProtocol: string;
+  validator: {
+		validationError: {
+			target: false,
+			value: false
+		}
+	};
 }
 
 interface IConfig {
   [key: string]: IEnvironmentConfig;
   development: IEnvironmentConfig;
   production: IEnvironmentConfig;
-}
+ }
 
 const rootPath = process.cwd();
 const jwtSecret = extractKey(`${rootPath}/src/shared/keys/jwt.private.key`);
@@ -29,10 +41,16 @@ const Config: IConfig = {
   development: {
     rootPath,
     db: {
-      url: 'http://localhost:8529',
+      url: 'http://10.151.40.17:8529',
       dbname: 'NAGA',
       username: 'gong',
       password: 'fj00admin',
+    },
+    mssql: {
+      server: 'cws',
+      database: 'TipMan',
+      user: 'dfg/it08',
+      password: 'G1971g',
     },
     httpPort: 3000,
     wsPort: 3001,
@@ -40,6 +58,12 @@ const Config: IConfig = {
     domain: 'localhost',
     httpProtocol: 'http',
     wsProtocol: 'ws',
+    validator: {
+      validationError: {
+        target: false,
+        value: false
+      }
+    }
   },
   production: {
     rootPath,
@@ -49,13 +73,26 @@ const Config: IConfig = {
       username: 'gong',
       password: 'fj00admin',
     },
+    mssql: {
+      server: 'cws',
+      database: 'TipMan',
+      user: 'dfg/it08',
+      password: 'G1971g',
+    },
     httpPort: +process.env.HTTP_SERVER_PORT,
     wsPort: +process.env.WS_PORT,
     jwtSecret: process.env.JWT_SECRET,
     domain: process.env.DOMAIN,
     httpProtocol: process.env.HTTP_PROTOCOL,
     wsProtocol: process.env.WS_PROTOCOL,
+    validator: {
+      validationError: {
+        target: false,
+        value: false
+      }
+    }
   },
+
 };
 
 export { IEnvironmentConfig, IConfig, Config };
