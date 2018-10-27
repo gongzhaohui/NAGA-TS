@@ -20,6 +20,7 @@ async function bootstrap() {
 
   require('./config/index')(SERVER_CONFIG, express);
   // console.log('config:' + JSON.stringify(SERVER_CONFIG));
+  console.log(__dirname);
   const app = await NestFactory.create(
     ApplicationModule,
     express,
@@ -40,6 +41,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
+
   await app.listen(SERVER_CONFIG.httpPort);
 
   if (module.hot) {

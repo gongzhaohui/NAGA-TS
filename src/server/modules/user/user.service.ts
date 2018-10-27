@@ -1,11 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-// import {DatabaseModule} from '../database/database.module';
-import { Database} from 'arangojs';
 import {Connection, Repository} from 'typeorm';
 
 import { DB_CONNECTION_TOKEN, USER_MODEL_TOKEN , MSSQL_CONNECTION_TOKEN, USER_MODEL_TOKEN_MSSQL} from 'server.constants';
 import { BaseService } from '../../base';
-import { IUser } from './interfaces/user.interface';
 import {UserEntity} from './user.entity';
 
 @Injectable()

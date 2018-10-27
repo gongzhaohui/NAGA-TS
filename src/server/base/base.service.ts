@@ -1,7 +1,7 @@
 import { UnprocessableEntityException } from '@nestjs/common';
 import { BaseEntity, DeleteResult, Repository, DeepPartial } from 'typeorm';
 import { validate } from 'class-validator';
-import {Config} from '../../config/config';
+// import {Config} from '../../config/config';
 import {FindOneOptions} from 'typeorm/find-options/FindOneOptions';
 import {FindConditions} from 'typeorm/find-options/FindConditions';
 

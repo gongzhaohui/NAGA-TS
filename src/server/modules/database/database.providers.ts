@@ -21,7 +21,7 @@ export const databaseProviders = [
     provide: MSSQL_CONNECTION_TOKEN,
     useFactory: () => {
       // const dbConfig = SERVER_CONFIG.mssql;
-      return  getConnection();
+      return  getConnection('sql');
     },
   },
 ];

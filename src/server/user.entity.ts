@@ -9,7 +9,7 @@ import {
 import { Entity, Column, PrimaryColumn } from 'typeorm';
 // import { Roles } from 'decorators/roles.decorator';
 import { ApiModelProperty } from '@nestjs/swagger';
-import { SupperEntity } from '../../base';
+import { SupperEntity } from './base';
 
 @Entity()
 export class UserEntity extends SupperEntity {

@@ -7,6 +7,7 @@ import { SERVER_CONFIG } from '../../../server.constants';
 import { IUser } from '../../user/interfaces/user.interface';
 import { IJwtPayload } from '../interfaces/jwt-payload.interface';
 import { LoginUserDto } from '../../user/dto/login.user.dto';
+import {UserEntity} from '../../user/user.entity';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy
@@ -26,7 +27,7 @@ export class JwtStrategy extends PassportStrategy
     };
     // console.log('payload:' + payload.sub);
     // console.log('logininfo:' + JSON.stringify(longinUser));
-    const user: IUser = await this.authService.validateUser(longinUser);
+    const user: UserEntity = await this.authService.validateUser(longinUser);
 
     if (!user) {
       throw new UnauthorizedException();

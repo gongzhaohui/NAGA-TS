@@ -29,7 +29,7 @@ export class UserResolvers {
     @Context() ctx: any,
     @Info() info: any,
   ) {
-    return await this.userService.getAll({});
+    return await this.userService.findAll();
   }
 
   @Query('user')
@@ -41,7 +41,7 @@ export class UserResolvers {
   ): Promise<any> {
     // console.log('userkey:' + _key);
     const _key = args('_key');
-    return await this.userService.getByKey(_key);
+    return await this.userService.findOneById(_key);
   }
 
   @Mutation('createUser')
@@ -51,7 +51,7 @@ export class UserResolvers {
     @Context() ctx: any,
     @Info() info: any,
   ): Promise<any> {
-    const createdUser = await this.userService.insertOne(args.body);
+    const createdUser = await this.userService.create(args.body);
     pubSub.publish('userCreated', { userCreated: createdUser });
     return createdUser;
   }

@@ -2,7 +2,7 @@ import {BaseEntity, DeleteResult, DeepPartial} from 'typeorm';
 import {Body, Delete, Get, Param, ParseIntPipe, Patch, Post, Put} from '@nestjs/common';
 import {BaseService} from './base.service';
 
-export class RestController<T extends BaseEntity> {
+export class BaseController<T extends BaseEntity> {
 	protected service: BaseService<T>;
 
 	@Get('/')
