@@ -10,7 +10,7 @@ import { UserService } from '../user/user.service';
 import { IJwtPayload } from './interfaces/jwt-payload.interface';
 import {UserEntity} from '../user/user.entity';
 import {DeepPartial} from 'typeorm';
-import { IUser } from '../user/interfaces/user.interface';
+// import { IUser } from '../user/interfaces/user.interface';
 import { Credentials } from '../user/dto/Credentials';
 import { CreateUserDto } from '../user/dto/create.user.dto';
 import { hashSync, compareSync } from 'bcryptjs';
@@ -55,7 +55,7 @@ export class AuthService {
     // }
   }
   async validateUser(payload: IJwtPayload): Promise<UserEntity> {
-    console.log('authserv-payload:' + payload);
+    // console.log('authserv-payload:' + payload);
     return await this.usersService.findOneById(payload.sub);
   }
 
