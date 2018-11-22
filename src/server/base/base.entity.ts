@@ -1,6 +1,7 @@
-import {Column, BaseEntity, Generated, CreateDateColumn, UpdateDateColumn, VersionColumn} from 'typeorm';
+import {Column, BaseEntity, Generated, CreateDateColumn, UpdateDateColumn, VersionColumn, Entity} from 'typeorm';
 import {ApiModelProperty} from '@nestjs/swagger';
 
+@Entity()
 export class SupperEntity extends BaseEntity {
 
 	@ApiModelProperty()
@@ -17,13 +18,13 @@ export class SupperEntity extends BaseEntity {
 
 	@ApiModelProperty()
 	@CreateDateColumn({
-		type: 'timestamp'
+		type: 'datetime'
 	})
 	public cratedAt: Date;
 
 	@ApiModelProperty()
 	@UpdateDateColumn({
-		type: 'timestamp'
+		type: 'smalldatetime'
 	})
 	public updatedAt: Date;
 }

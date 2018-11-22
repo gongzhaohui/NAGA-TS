@@ -11,7 +11,7 @@ import { IJwtPayload } from './interfaces/jwt-payload.interface';
 import {UserEntity} from '../user/user.entity';
 import {DeepPartial} from 'typeorm';
 import { IUser } from '../user/interfaces/user.interface';
-import { LoginUserDto } from '../user/dto/login.user.dto';
+import { Credentials } from '../user/dto/Credentials';
 import { CreateUserDto } from '../user/dto/create.user.dto';
 import { hashSync, compareSync } from 'bcryptjs';
 
@@ -22,12 +22,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signIn(loginUser: LoginUserDto): Promise<string> {
+  async signIn(credentials: Credentials): Promise<string> {
     // In the real-world app you shouldn't expose this method publicly
     // instead, return a token once you verify user credentials
     // const user: IJwtPayload = jwtPayload;
-    const user: UserEntity = await this.validateUser(loginUser);
-    if (!user || !compareSync(loginUser.password, user.hashedPassword)) {
+    const user: UserEntity = await this.usersService.findOneById(credentials._key);
+    if (!user || !compareSync(credentials.password, user.hashedPassword)) {
       throw new UnauthorizedException();
     }
     const jwtPayload: IJwtPayload = {
@@ -41,7 +41,8 @@ export class AuthService {
   }
 
   async signUp(user: CreateUserDto): Promise<string> {
-    try {
+    // try {
+      console.log(user);
       const dbUser = Object.assign(user, {
         hashedPassword: hashSync(user.password),
       });
@@ -49,28 +50,30 @@ export class AuthService {
       const createdUser: UserEntity = await this.usersService.create(dbUser);
       const payload: IJwtPayload = { sub: user._key, roles: createdUser.roles };
       return this.createToken(payload);
-    } catch {
-      throw new NotAcceptableException('Can`t create user.');
-    }
+    // } catch {
+    //   throw new NotAcceptableException('Can`t create user.');
+    // }
   }
-  async validateUser(loginUser: LoginUserDto): Promise<UserEntity> {
-    const bindVars = Object.assign({}, loginUser);
-    delete bindVars.password;
-    return await this.usersService.findOne(bindVars);
+  async validateUser(payload: IJwtPayload): Promise<UserEntity> {
+    console.log('authserv-payload:' + payload);
+    return await this.usersService.findOneById(payload.sub);
   }
 
-  async updatePassword(loginUser: LoginUserDto): Promise<string> {
-    if (!loginUser.email) {
+  async updatePassword(credentials: Credentials): Promise<string> {
+    if (!credentials.email) {
       throw new UnauthorizedException('The email field is not provided.');
     }
-    if (!loginUser.password) {
+    if (!credentials.password) {
       throw new UnauthorizedException('The password field is not provided.');
     }
-    let user: UserEntity = await this.validateUser(loginUser);
+    let user: UserEntity = await this.usersService.findOne({_key: credentials._key,
+       email: credentials.email,
+       hashedPassword: hashSync(credentials.password)
+      });
     if (!user) {
       throw new UnauthorizedException('The user key and email are not valid.');
     }
-    user = await this.usersService.patch(loginUser._key, { hashedPassword: hashSync(loginUser.password) });
+    user = await this.usersService.patch(credentials._key, { hashedPassword: hashSync(credentials.newPassword) });
 
     const jwtPayload: IJwtPayload = {
       sub: user._key,

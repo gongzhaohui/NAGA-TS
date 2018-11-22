@@ -21,11 +21,11 @@ export class RolesGuard extends AuthGuard('jwt') {
       // console.log('isvalid:' + JSON.stringify (isValidUser));
       const request = context.switchToHttp().getRequest();
       const user = request.user;
-      //  console.log('user:' + JSON.stringify(request.user));
+      console.log('user:' + JSON.stringify(request.user));
 
       const hasRole = () =>
         user.roles.some((userRole: string) =>
-          roles.some(role => userRole === role),
+          roles.some(role => userRole === role || userRole === 'admin'),
         );
 
       return isValidUser && user && user.roles && hasRole();

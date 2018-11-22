@@ -14,6 +14,16 @@ interface IEnvironmentConfig {
     user: string;
     password: string;
   };
+  database: {
+    type: string,
+    name?: string,
+    host: string,
+    port: number,
+    username: string,
+    password: string,
+    database: string,
+    domain?: string
+  };
   httpPort: number;
   wsPort: number;
   jwtSecret: string;
@@ -52,6 +62,16 @@ const Config: IConfig = {
       user: 'dfg/it08',
       password: 'G1971g',
     },
+    database: {
+      type: 'mssql',
+      name: 'sql',
+      host: 'localhost',
+      port: 1433,
+      username: 'gong',
+      password: 'G1971g',
+      database: 'test',
+      domain: 'dfg'
+    },
     httpPort: 3000,
     wsPort: 3001,
     jwtSecret: 'fj00admin',
@@ -78,6 +98,16 @@ const Config: IConfig = {
       database: 'TipMan',
       user: 'dfg/it08',
       password: 'G1971g',
+    },
+    database: {
+      type: 'mssql',
+      name: 'sql',
+      host: 'localhost',
+      port: 1433,
+      username: 'gong',
+      password: 'G1971g',
+      database: 'test',
+      domain: 'dfg'
     },
     httpPort: +process.env.HTTP_SERVER_PORT,
     wsPort: +process.env.WS_PORT,

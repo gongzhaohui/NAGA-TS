@@ -8,7 +8,7 @@ import {UserEntity} from './user.entity';
 import {BaseController} from '../../base';
 
 @ApiUseTags('users')
-@ApiBearerAuth()
+// @ApiBearerAuth()
 @Controller('users')
 export class UserController extends BaseController<UserEntity> {
 

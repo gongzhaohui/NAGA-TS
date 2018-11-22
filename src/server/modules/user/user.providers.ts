@@ -7,12 +7,12 @@ import {UserEntity} from './user.entity';
 export const userProviders = [
   {
     provide: USER_MODEL_TOKEN_MSSQL,
-    useFactory: (db: Connection) =>  db.getRepository(UserEntity),
+    useFactory: (connection: Connection) =>  connection.getRepository(UserEntity),
     inject: [MSSQL_CONNECTION_TOKEN],
   },
-  {
-    provide: USER_MODEL_TOKEN,
-    useFactory: (db: Database) =>  db.collection('users'),
-    inject: [DB_CONNECTION_TOKEN],
-  },
+  // {
+  //   provide: USER_MODEL_TOKEN,
+  //   useFactory: (db: Database) =>  db.collection('users'),
+  //   inject: [DB_CONNECTION_TOKEN],
+  // },
 ];

@@ -6,7 +6,7 @@ export class CreateUserDto {
   @ApiModelProperty() email: string;
   @ApiModelProperty() password: string;
   @ApiModelProperty() name: String;
-  @ApiModelProperty() birthed: String;
+  @ApiModelProperty() birthed?: String;
   @ApiModelProperty() title: String;
   @ApiModelProperty() gender: String;
 }

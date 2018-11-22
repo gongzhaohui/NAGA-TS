@@ -20,7 +20,7 @@ async function bootstrap() {
 
   require('./config/index')(SERVER_CONFIG, express);
   // console.log('config:' + JSON.stringify(SERVER_CONFIG));
-  console.log(__dirname);
+  // console.log(__dirname);
   const app = await NestFactory.create(
     ApplicationModule,
     express,

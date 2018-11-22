@@ -2,7 +2,7 @@ import {
   IsArray,
   IsEmail,
   IsString,
-  IsDate,
+  IsDateString,
   MinLength,
   Validate,
 } from 'class-validator';
@@ -30,7 +30,7 @@ export class UserEntity extends SupperEntity {
 
   @ApiModelProperty()
   @Column({ nullable: true })
-  @IsDate()
+  @IsDateString()
   birthed?: Date;
 
   @ApiModelProperty()
