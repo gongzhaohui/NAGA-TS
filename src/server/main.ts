@@ -31,7 +31,7 @@ async function bootstrap() {
 
   app.enableCors();
   // app.useGlobalGuards(new (AuthGuard('jwt'))());
-  app.useGlobalGuards(new RolesGuard());
+
   const options = new DocumentBuilder()
     .setTitle('NAGA-TS Api')
     .setDescription('The NAGA-TS API description')
@@ -41,7 +41,7 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
-
+  app.useGlobalGuards(new RolesGuard());
   await app.listen(SERVER_CONFIG.httpPort);
 
   if (module.hot) {

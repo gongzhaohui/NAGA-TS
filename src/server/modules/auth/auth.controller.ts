@@ -2,21 +2,15 @@ import {
   Controller,
   Post,
   Get,
-  Req,
-  UseGuards,
-  Body,
-  Param,
+  Body
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
 
 import { AuthService } from './auth.service';
 import { IToken } from './interfaces/token.interface';
-import { RolesGuard } from '../../guards/roles.guard';
 import { Roles } from '../../decorators/roles.decorator';
 import { ApiBearerAuth, ApiUseTags } from '@nestjs/swagger';
 import { Credentials } from '../user/dto/Credentials';
-import { CreateUserDto } from '../user/dto/create.user.dto';
+import { UserEntity } from 'modules/user/user.entity';
 
 @ApiUseTags('auth')
 @Controller('auth')
@@ -33,14 +27,14 @@ export class AuthController {
     };
   }
   @Post('signUp')
-  async signUp(@Body() theOne: CreateUserDto) {
+  async signUp(@Body() theOne: UserEntity) {
     return await this.authService.signUp(theOne);
   }
   @Post('updatePassword')
-  async updatePassword(@Body() user: Credentials): Promise<IToken> {
+  async changePassword(@Body() user: Credentials): Promise<IToken> {
     // console.log('req:' + JSON.stringify( user));
     // console.log(JSON.stringify(body.user));
-    const accessToken = await this.authService.updatePassword(user);
+    const accessToken = await this.authService.changePassword(user);
     return {
       accessToken,
     };
@@ -49,6 +43,7 @@ export class AuthController {
   @ApiBearerAuth()
   @Roles('user')
   public async authorized() {
+    // swagger authorization : bearer token
     console.log('Authorized route...');
   }
 }

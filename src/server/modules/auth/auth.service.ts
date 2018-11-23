@@ -9,10 +9,7 @@ import {
 import { UserService } from '../user/user.service';
 import { IJwtPayload } from './interfaces/jwt-payload.interface';
 import {UserEntity} from '../user/user.entity';
-import {DeepPartial} from 'typeorm';
-// import { IUser } from '../user/interfaces/user.interface';
 import { Credentials } from '../user/dto/Credentials';
-import { CreateUserDto } from '../user/dto/create.user.dto';
 import { hashSync, compareSync } from 'bcryptjs';
 
 @Injectable()
@@ -27,7 +24,13 @@ export class AuthService {
     // instead, return a token once you verify user credentials
     // const user: IJwtPayload = jwtPayload;
     const user: UserEntity = await this.usersService.findOneById(credentials._key);
-    if (!user || !compareSync(credentials.password, user.hashedPassword)) {
+    // console.log('user:' + JSON.stringify(user));
+    // console.log('compare:' + compareSync(credentials.password, user.password));
+    // console.log('passw:' + credentials.password);
+    // const salt = user.password.substr(0, 29);
+    // console.log('salt:' + salt);
+    // console.log('newhash:' + hashSync(credentials.password, salt));
+    if (!user || !compareSync(credentials.password, user.password)) {
       throw new UnauthorizedException();
     }
     const jwtPayload: IJwtPayload = {
@@ -40,14 +43,11 @@ export class AuthService {
     return this.jwtService.sign(jwtPayload);
   }
 
-  async signUp(user: CreateUserDto): Promise<string> {
+  async signUp(user: UserEntity): Promise<string> {
     // try {
-      console.log(user);
-      const dbUser = Object.assign(user, {
-        hashedPassword: hashSync(user.password),
-      });
-      delete dbUser.password;
-      const createdUser: UserEntity = await this.usersService.create(dbUser);
+      // console.log(user);
+
+      const createdUser: UserEntity = await this.usersService.create(user);
       const payload: IJwtPayload = { sub: user._key, roles: createdUser.roles };
       return this.createToken(payload);
     // } catch {
@@ -59,7 +59,7 @@ export class AuthService {
     return await this.usersService.findOneById(payload.sub);
   }
 
-  async updatePassword(credentials: Credentials): Promise<string> {
+  async changePassword(credentials: Credentials): Promise<string> {
     if (!credentials.email) {
       throw new UnauthorizedException('The email field is not provided.');
     }
@@ -67,13 +67,15 @@ export class AuthService {
       throw new UnauthorizedException('The password field is not provided.');
     }
     let user: UserEntity = await this.usersService.findOne({_key: credentials._key,
-       email: credentials.email,
-       hashedPassword: hashSync(credentials.password)
+       email: credentials.email
       });
     if (!user) {
       throw new UnauthorizedException('The user key and email are not valid.');
     }
-    user = await this.usersService.patch(credentials._key, { hashedPassword: hashSync(credentials.newPassword) });
+    if (user.password !== '' && !compareSync(credentials.password, user.password)) {
+        throw new UnauthorizedException('The password of user is not correct.');
+      }
+    user = await this.usersService.patch(credentials._key, { password: credentials.newPassword });
 
     const jwtPayload: IJwtPayload = {
       sub: user._key,

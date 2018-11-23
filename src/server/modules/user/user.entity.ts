@@ -2,63 +2,76 @@ import {
   IsArray,
   IsEmail,
   IsString,
-  IsDateString,
+  IsDate,
   MinLength,
   Validate,
+  IsOptional,
 } from 'class-validator';
-import { Entity, Column, PrimaryColumn } from 'typeorm';
+import { Entity, Column, PrimaryColumn, BeforeInsert, BeforeUpdate} from 'typeorm';
 // import { Roles } from 'decorators/roles.decorator';
-import { ApiModelProperty } from '@nestjs/swagger';
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import { SupperEntity } from '../../base';
+import { hashSync } from 'bcryptjs';
 
 @Entity()
 export class UserEntity extends SupperEntity {
   @ApiModelProperty()
-  @PrimaryColumn({ length: 10 })
   @IsString()
+  @PrimaryColumn({ length: 10 })
   _key: string;
 
   @ApiModelProperty()
-  @Column()
   @IsString()
+  @Column()
   name: string;
 
   @ApiModelProperty()
-  @Column({ unique: true })
   @IsEmail()
+  @Column({ unique: true })
   email: string;
 
-  @ApiModelProperty()
+  @ApiModelPropertyOptional()
+  @IsOptional()
+  @IsDate()
   @Column({ nullable: true })
-  @IsDateString()
   birthed?: Date;
 
-  @ApiModelProperty()
-  @Column({ nullable: true })
+  @ApiModelPropertyOptional()
+  @IsOptional()
   @IsString()
+  @Column({ nullable: true })
   firstName: string;
 
-  @ApiModelProperty()
+  @ApiModelPropertyOptional()
+  @IsOptional()
   @Column({ nullable: true })
   lastName: string;
 
-  @ApiModelProperty()
+  @ApiModelPropertyOptional()
+  @IsOptional()
   @IsString()
   @Column({ nullable: true })
   title?: string;
 
-  @ApiModelProperty()
-  @Column({ nullable: true, length: 5, default: 'man' })
+  @ApiModelPropertyOptional()
+  @IsOptional()
   @IsString()
+  @Column({ nullable: true, length: 5, default: 'man' })
   gender: string;
 
   @ApiModelProperty()
-  @Column()
   @MinLength(7)
-  public hashedPassword: string;
+  @Column()
+  public password: string;
 
   @ApiModelProperty()
-  @Column('simple-array')
   @IsArray()
+  @Column('simple-array')
   roles: string[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    this.password = hashSync(this.password);
+  }
 }
