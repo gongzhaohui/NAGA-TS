@@ -20,17 +20,8 @@ export class AuthService {
   ) {}
 
   async signIn(credentials: Credentials): Promise<string> {
-    // In the real-world app you shouldn't expose this method publicly
-    // instead, return a token once you verify user credentials
-    // const user: IJwtPayload = jwtPayload;
-    const user: UserEntity = await this.usersService.findOneById(credentials._key);
-    // console.log('user:' + JSON.stringify(user));
-    // console.log('compare:' + compareSync(credentials.password, user.password));
-    // console.log('passw:' + credentials.password);
-    // const salt = user.password.substr(0, 29);
-    // console.log('salt:' + salt);
-    // console.log('newhash:' + hashSync(credentials.password, salt));
-    if (!user || !compareSync(credentials.password, user.password)) {
+    const user: UserEntity = await this.usersService.signIn(credentials);
+    if (!user ) {
       throw new UnauthorizedException();
     }
     const jwtPayload: IJwtPayload = {

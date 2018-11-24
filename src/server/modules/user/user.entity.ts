@@ -70,7 +70,6 @@ export class UserEntity extends SupperEntity {
   roles: string[];
 
   @BeforeInsert()
-  @BeforeUpdate()
   hashPassword() {
     this.password = hashSync(this.password);
   }
