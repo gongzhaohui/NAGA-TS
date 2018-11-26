@@ -6,9 +6,10 @@ import {ApiBearerAuth, ApiUseTags} from '@nestjs/swagger';
 import {UserService} from './user.service';
 import {UserEntity} from './user.entity';
 import {BaseController} from '../../base';
-
+import { Roles } from '../../decorators/roles.decorator';
 @ApiUseTags('users')
-// @ApiBearerAuth()
+@ApiBearerAuth()
+@Roles('admin')
 @Controller('users')
 export class UserController extends BaseController<UserEntity> {
 

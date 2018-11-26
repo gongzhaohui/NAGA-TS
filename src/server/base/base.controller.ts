@@ -21,8 +21,8 @@ export class BaseController<T extends BaseEntity> {
 	}
 
 	@Put('/:id')
-	public async update(@Body() data: DeepPartial<T>): Promise<T> {
-		return this.service.update(data);
+	public async update(@Param('id') id: string, @Body() data: DeepPartial<T>): Promise<T> {
+		return this.service.update(id, data);
 	}
 
 	@Patch('/:id')

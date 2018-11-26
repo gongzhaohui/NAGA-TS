@@ -15,12 +15,12 @@ import { SupperEntity } from '../../base';
 import { hashSync } from 'bcryptjs';
 import { string } from 'joi';
 @Entity()
-export class LedgerEntity {
-id:number;
-shelfNo: string;
+export class ShelfEntity {
+@PrimaryColumn()id: string;
+@Column()shelfNo: string;
 
-drawerNo:string;
+@Column()drawerNo: string;
 
-available:number;
+@Column() available: number;
 
 }

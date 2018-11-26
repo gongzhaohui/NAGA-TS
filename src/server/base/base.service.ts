@@ -26,7 +26,7 @@ export class BaseService<T extends BaseEntity> {
 		return entity.save();
 	}
 
-	public async update(data: DeepPartial<T>): Promise<T> {
+	public async update(id: string, data: DeepPartial<T>): Promise<T> {
 		return this.create(data);
 	}
 

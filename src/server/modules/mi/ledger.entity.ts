@@ -20,11 +20,11 @@ export class LedgerEntity extends SupperEntity {
   @IsString()
   @PrimaryColumn({ length: 20 })
   code: string;
-
+@Column()
   spec: string;
-  spec_o: string;
-  maker: string;
-  material: string;
+  @Column()  spec_o: string;
+  @Column() maker: string;
+  @Column() material: string;
 
   /**
    * general
@@ -33,7 +33,7 @@ export class LedgerEntity extends SupperEntity {
    * @type {string}
    * @memberof LedgerEntity
    */
-  usage: string;
+  @Column()usage: string;
 
 /**
  * internal
@@ -41,21 +41,21 @@ export class LedgerEntity extends SupperEntity {
  * @type {string}
  * @memberof LedgerEntity
  */
-source: string;
+@Column()source: string;
 
-verificationPeriod: number;
-verificationPeriodUnit: string;
+@Column()verificationPeriod: number;
+@Column()verificationPeriodUnit: string;
 
-lastVeriDate: Date;
+@Column()lastVeriDate: Date;
 
-verificationStatus: string;
+@Column()verificationStatus: string;
 
-shelfNo: string;
+@Column()shelfNo: string;
 
-drawerNo: string;
+@Column()drawerNo: string;
 
-serial: number;
+@Column()serial: number;
 
-bearer: string;
+@Column()bearer: string;
 
 }
