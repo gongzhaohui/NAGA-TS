@@ -54,13 +54,13 @@ const Config: IConfig = {
       url: 'http://10.151.40.17:8529',
       dbname: 'NAGA',
       username: 'gong',
-      password: 'fj00admin',
+      password: 'XXXXXXXX',
     },
     mssql: {
       server: 'cws',
       database: 'TipMan',
-      user: 'dfg/it08',
-      password: 'G1971g',
+      user: 'it08',
+      password: 'XXXXXXXX',
     },
     database: {
       type: 'mssql',
@@ -91,13 +91,13 @@ const Config: IConfig = {
       url: 'http://10.151.40.17:8529',
       dbname: 'NAGA',
       username: 'gong',
-      password: 'fj00admin',
+      password: 'XXXXXXXX',
     },
     mssql: {
       server: 'cws',
       database: 'TipMan',
       user: 'dfg/it08',
-      password: 'G1971g',
+      password: 'XXXXXXXX',
     },
     database: {
       type: 'mssql',
@@ -105,7 +105,7 @@ const Config: IConfig = {
       host: 'localhost',
       port: 1433,
       username: 'gong',
-      password: 'G1971g',
+      password: 'XXXXXXXX',
       database: 'test',
       domain: 'dfg'
     },
