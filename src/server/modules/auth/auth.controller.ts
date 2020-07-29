@@ -8,11 +8,11 @@ import {
 import { AuthService } from './auth.service';
 import { IToken } from './interfaces/token.interface';
 import { Roles } from '../../decorators/roles.decorator';
-import { ApiBearerAuth, ApiUseTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Credentials } from '../user/dto/Credentials';
 import { UserEntity } from 'modules/user/user.entity';
 
-@ApiUseTags('auth')
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}

@@ -1,7 +1,7 @@
-import {ApiModelProperty} from '@nestjs/swagger';
+import {ApiProperty} from '@nestjs/swagger';
 export class Credentials {
-  @ApiModelProperty()  _key: string;
-  @ApiModelProperty() password: string;
-  @ApiModelProperty() newPassword?: string;
-  @ApiModelProperty() email?: string;
+  @ApiProperty()  _key: string;
+  @ApiProperty() password: string;
+  @ApiProperty() newPassword?: string;
+  @ApiProperty() email?: string;
 }

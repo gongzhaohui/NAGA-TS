@@ -2,12 +2,12 @@ import {Body, Controller, Get, Param, Post, Query, UseGuards} from '@nestjs/comm
 import {AuthGuard} from '@nestjs/passport';
 import * as _ from 'lodash';
 
-import {ApiBearerAuth, ApiUseTags} from '@nestjs/swagger';
+import {ApiBearerAuth, ApiTags} from '@nestjs/swagger';
 import {UserService} from './user.service';
 import {UserEntity} from './user.entity';
 import {BaseController} from '../../base';
 import { Roles } from '../../decorators/roles.decorator';
-@ApiUseTags('users')
+@ApiTags('users')
 @ApiBearerAuth()
 @Roles('admin')
 @Controller('users')

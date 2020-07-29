@@ -10,7 +10,7 @@ import { SERVER_CONFIG } from '../../server.constants';
   imports: [
     /*PassportModule.register({defaultStrategy: 'jwt'}),*/
     JwtModule.register({
-      secretOrPrivateKey: SERVER_CONFIG.jwtSecret,
+      secret: SERVER_CONFIG.jwtSecret,
       signOptions: {
         expiresIn: 3600,
       },

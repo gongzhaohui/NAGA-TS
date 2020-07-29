@@ -1,9 +1,9 @@
-import { MiddlewareFunction, BadRequestException } from '@nestjs/common';
+import {MiddlewareConsumer, BadRequestException } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { validate } from 'joi';
 import { authUserSchema } from '../../user/joi/auth-user.joi';
 
-export const bodyValidatorMiddleware: MiddlewareFunction =
+export const bodyValidatorMiddleware: MiddlewareConsumer =
   async (req: Request, res: Response, next: Function) => {
     const result = validate(req.body, authUserSchema);
 

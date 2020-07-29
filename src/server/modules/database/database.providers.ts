@@ -7,6 +7,7 @@ import {
 } from '../../server.constants';
 import { connect } from 'net';
 // import {Config} from '../../config/config';
+const sqlDriver = require('mssql/msnodesqlv8');
 
 // import {Shared} from '@nestjs/core';
 export const databaseProviders = [
@@ -28,11 +29,19 @@ export const databaseProviders = [
       username: 'it08',
       password: 'G1971g',
       database: 'test',
-      domain: 'dfg',
+      domain: 'dfg.com.cn',
       entities: [
           __dirname + '/../**/*.entity{.ts,.js}',
       ],
       synchronize: true,
+      extra:{driver: sqlDriver,
+        options: {
+            trustedConnection: true,
+            encrypt:false,
+            enableArithAbort:true,
+            timeout:30000,
+        }},
+      options: { encrypt:false,enableArithAbort:true,},
     }),
   },
 ];

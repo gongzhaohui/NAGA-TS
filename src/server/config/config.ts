@@ -72,7 +72,7 @@ const Config: IConfig = {
       database: 'test',
       domain: 'dfg'
     },
-    httpPort: 3000,
+    httpPort: 4000,
     wsPort: 3001,
     jwtSecret: 'fj00admin',
     domain: 'localhost',

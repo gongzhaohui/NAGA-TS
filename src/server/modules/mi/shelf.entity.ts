@@ -10,7 +10,7 @@ import {
 } from 'class-validator';
 import { Entity, Column, PrimaryColumn, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate} from 'typeorm';
 // import { Roles } from 'decorators/roles.decorator';
-import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty,  } from '@nestjs/swagger';
 import { SupperEntity } from '../../base';
 import { hashSync } from 'bcryptjs';
 import { string } from 'joi';
